@@ -35,7 +35,8 @@ name := "$name$"
  */
 val BaseVersion = "0.1"
 
-licenses += ("Apache-2.0", url("http://www.apache.org/licenses/"))
+licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
+
 
 // bintrayVcsUrl := Some("...")
 
