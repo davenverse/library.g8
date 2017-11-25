@@ -1,1 +1,1 @@
-package object $name$
+object $name$
