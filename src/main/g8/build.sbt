@@ -15,7 +15,7 @@ lazy val $name$ = project.in(file("."))
 lazy val commonSettings = Seq(
   organization := "$organization$",
   licenses += ("MIT", url("https://opensource.org/licenses/MIT")),
-  
+
   scalaVersion := "$scala_version$",
 
   addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.4" cross CrossVersion.binary),
