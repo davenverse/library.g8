@@ -34,10 +34,10 @@ lazy val commonSettings = Seq(
 //    "co.fs2"                      %% "fs2-core"                   % "0.10.0-M8",
 //    "co.fs2"                      %% "fs2-io"                     % "0.10.0-M8",
 //
-//    "org.http4s"                  %% "http4s-dsl"                 % "0.18.0-M3",
-//    "org.http4s"                  %% "http4s-blaze-server"        % "0.18.0-M3",
-//    "org.http4s"                  %% "http4s-blaze-client"        % "0.18.0-M3",
-//    "org.http4s"                  %% "http4s-circe"               % "0.18.0-M3",
+//    "org.http4s"                  %% "http4s-dsl"                 % "0.18.0-M5",
+//    "org.http4s"                  %% "http4s-blaze-server"        % "0.18.0-M5",
+//    "org.http4s"                  %% "http4s-blaze-client"        % "0.18.0-M5",
+//    "org.http4s"                  %% "http4s-circe"               % "0.18.0-M5",
 //
 //    "io.circe"                    %% "circe-core"                 % "0.9.0-M2",
 //    "io.circe"                    %% "circe-generic"              % "0.9.0-M2",
