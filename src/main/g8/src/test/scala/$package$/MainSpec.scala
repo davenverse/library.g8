@@ -6,7 +6,7 @@ object MainSpec extends mutable.Specification {
 
   "Main" should {
     "run a println" in {
-     Main.main(Array.empty[String]).should_===(())
+      Main.main(Array.empty[String]).should_===(())
     }
   }
 
