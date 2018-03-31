@@ -23,12 +23,11 @@ val scShapelessV = "1.1.6"
 
 
 lazy val contributors = Seq(
-  "ChristopherDavenport" -> "Christopher Davenport"
+  "$contributorUsername$" -> "$contributorName$"
 )
 
 lazy val commonSettings = Seq(
   organization := "$organization$",
-  licenses += ("MIT", url("https://opensource.org/licenses/MIT")),
 
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
@@ -118,11 +117,11 @@ lazy val releaseSettings = {
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     scmInfo := Some(
       ScmInfo(
-        url("https://github.com/ChristopherDavenport/$name$"),
-        "git@github.com:ChristopherDavenport/$name$.git"
+        url("https://github.com/$contributorUsername$/$name$"),
+        "git@github.com:$contributorUsername$/$name$.git"
       )
     ),
-    homepage := Some(url("https://github.com/ChristopherDavenport/$name$")),
+    homepage := Some(url("https://github.com/$contributorUsername$/$name$")),
     licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
     publishMavenStyle := true,
     pomIncludeRepository := { _ =>
