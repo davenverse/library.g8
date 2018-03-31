@@ -5,21 +5,21 @@ lazy val core = project.in(file("."))
       name := "$name$"
     )
 
-val catsV = "1.1.0"
-val kittensV = "1.0.0-RC3"
-val catsEffectV = "0.10"
-val mouseV = "0.16"
-val shapelessV = "2.3.2"
-val fs2V = "0.10.3"
-val http4sV = "0.18.5"
-val circeV = "0.9.2"
-val doobieV = "0.5.1"
-val pureConfigV = "0.9.1"
-val refinedV = "0.8.7"
+val catsV = "$catsV$"
+val kittensV = "$kittensV$"
+val catsEffectV = "$catsEffectV$"
+val mouseV = "$mouseV$"
+val shapelessV = "$shapelessV$"
+val fs2V = "$fs2V$"
+val http4sV = "$http4sV$"
+val circeV = "$circeV$"
+val doobieV = "$doobieV$"
+val pureConfigV = "$pureConfigV$"
+val refinedV = "$refinedV$"
 
-val specs2V = "4.0.3"
-val disciplineV = "0.8"
-val scShapelessV = "1.1.6"
+val specs2V = "$specs2V$"
+val disciplineV = "$disciplineV$"
+val scShapelessV = "$scalacheckShapelessV$"
 
 
 lazy val contributors = Seq(
