@@ -33,6 +33,7 @@ lazy val commonSettings = Seq(
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
 
   addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.6" cross CrossVersion.binary),
+  addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.2.4"),
 
   libraryDependencies ++= Seq(
     "org.typelevel"               %% "cats-core"                  % catsV,
