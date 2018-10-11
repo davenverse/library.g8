@@ -1,6 +1,6 @@
 
 lazy val core = project.in(file("."))
-    .settings(commonSettings)
+    .settings(commonSettings, releaseSettings)
     .settings(
       name := "$name$"
     )
@@ -21,6 +21,9 @@ val specs2V = "$specs2V$"
 val disciplineV = "$disciplineV$"
 val scShapelessV = "$scalacheckShapelessV$"
 
+val kindProjectorV = "$kindProjectorVersion$"
+val betterMonadicForV = "$betterMonadicForVersion$"
+
 
 lazy val contributors = Seq(
   "$contributorUsername$" -> "$contributorName$"
@@ -37,9 +40,10 @@ lazy val commonSettings = Seq(
 
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
+  scalacOptions += "-Yrangepos",
 
-  addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.7" cross CrossVersion.binary),
-  addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.2.4"),
+  addCompilerPlugin("org.spire-math" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
+  addCompilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForV),
   libraryDependencies ++= Seq(
     "org.typelevel"               %% "cats-core"                  % catsV,
 
@@ -77,7 +81,7 @@ lazy val commonSettings = Seq(
     "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
     "org.specs2"                  %% "specs2-scalacheck"          % specs2V       % Test,
     "org.typelevel"               %% "discipline"                 % disciplineV   % Test,
-    "com.github.alexarchambault"  %% "scalacheck-shapeless_1.13"  % scShapelessV  % Test
+    "com.github.alexarchambault"  %% "scalacheck-shapeless_1.14"  % scShapelessV  % Test
   )
 )
 
