@@ -1,9 +1,12 @@
 package $package$
 
-object Main {
+import cats.implicits._
+import cats.effect._
 
-  def main(args: Array[String]): Unit = {
-    println("I am a new project!")
+object Main extends IOApp {
+
+  def run(args: List[String]): IO[ExitCode] = {
+    IO(println("I am a new project!")).as(ExitCode.Success)
   }
 
 }

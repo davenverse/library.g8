@@ -17,6 +17,12 @@ val doobieV = "$doobieV$"
 val pureConfigV = "$pureConfigV$"
 val refinedV = "$refinedV$"
 
+val log4catsV = "$log4catsV$"
+val catsParV = "$catsParV$"
+val catsTimeV = "$catsTimeV$"
+val fuuidV = "$fuuidV$"
+val lineBackerV = "$lineBackerV$"
+
 val specs2V = "$specs2V$"
 val disciplineV = "$disciplineV$"
 val scShapelessV = "$scalacheckShapelessV$"
@@ -72,6 +78,18 @@ lazy val commonSettings = Seq(
     "org.tpolecat"                %% "doobie-hikari"              % doobieV,
     "org.tpolecat"                %% "doobie-postgres"            % doobieV,
     "org.tpolecat"                %% "doobie-specs2"              % doobieV       % Test,
+
+    "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
+    "io.chrisdavenport"           %% "log4cats-slf4j"             % log4catsV,
+    "io.chrisdavenport"           %% "log4cats-extras"            % log4catsV,
+    "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
+
+    "io.chrisdavenport"           %% "cats-par"                   % catsParV,
+    "io.chrisdavenport"           %% "cats-time"                  % catsTimeV,
+
+    "io.chrisdavenport"           %% "linebacker"                 % lineBackerV,
+
+    "io.chrisdavenport"           %% "fuuid"                      % fuuidV,
 
     "com.github.pureconfig"       %% "pureconfig"                 % pureConfigV,
 
