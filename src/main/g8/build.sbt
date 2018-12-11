@@ -39,8 +39,6 @@ val fuuidV = "$fuuidV$"
 val lineBackerV = "$lineBackerV$"
 
 val specs2V = "$specs2V$"
-val disciplineV = "$disciplineV$"
-val scShapelessV = "$scalacheckShapelessV$"
 
 val kindProjectorV = "$kindProjectorVersion$"
 val betterMonadicForV = "$betterMonadicForVersion$"
