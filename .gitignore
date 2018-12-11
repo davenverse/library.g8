@@ -4,3 +4,6 @@ lib_managed/
 src_managed/
 project/plugins/project/
 .idea/
+
+.bloop
+.metals

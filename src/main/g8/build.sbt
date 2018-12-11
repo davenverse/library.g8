@@ -1,9 +1,24 @@
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-lazy val core = project.in(file("."))
-    .settings(commonSettings, releaseSettings)
-    .settings(
-      name := "$name$"
-    )
+lazy val $name;format="projectName"$ = project.in(file("."))
+  .settings(commonSettings, releaseSettings, skipOnPublishSettings)
+  .aggregate(core, docs)
+
+lazy val core = project.in(file("core"))
+  .settings(commonSettings, releaseSettings, mimaSettings)
+  .settings(
+    name := "$name$"
+  )
+
+lazy val docs = project.in(file("docs"))
+  .settings(commonSettings, skipOnPublishSettings, micrositeSettings)
+  .dependsOn(core)
+  .enablePlugins(MicrositesPlugin)
+  .enablePlugins(TutPlugin)
+
+lazy val contributors = Seq(
+  "$contributorUsername$" -> "$contributorName$"
+)
 
 val catsV = "$catsV$"
 val kittensV = "$kittensV$"
@@ -30,16 +45,6 @@ val scShapelessV = "$scalacheckShapelessV$"
 val kindProjectorV = "$kindProjectorVersion$"
 val betterMonadicForV = "$betterMonadicForVersion$"
 
-
-lazy val contributors = Seq(
-  "$contributorUsername$" -> "$contributorName$"
-)
-
-// check for library updates whenever the project is [re]load
-onLoad in Global := { s =>
-  "dependencyUpdates" :: s
-}
-
 // General Settings
 lazy val commonSettings = Seq(
   organization := "$organization$",
@@ -47,6 +52,12 @@ lazy val commonSettings = Seq(
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
   scalacOptions += "-Yrangepos",
+
+  scalacOptions in (Compile, doc) ++= Seq(
+      "-groups",
+      "-sourcepath", (baseDirectory in LocalRootProject).value.getAbsolutePath,
+      "-doc-source-url", "https://github.com/$contributorUsername$/$name$/blob/v" + version.value + "€{FILE_PATH}.scala"
+  ),
 
   addCompilerPlugin("org.spire-math" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
   addCompilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForV),
@@ -218,6 +229,48 @@ lazy val mimaSettings = {
       import com.typesafe.tools.mima.core.ProblemFilters._
       Seq()
     }
+  )
+}
+
+lazy val micrositeSettings = {
+  import microsites._
+  Seq(
+    micrositeName := "$name$",
+    micrositeDescription := "$description$",
+    micrositeAuthor := "$contributorName$",
+    micrositeGithubOwner := "$contributorUsername$",
+    micrositeGithubRepo := "$name$",
+    micrositeBaseUrl := "/$name$",
+    micrositeDocumentationUrl := "https://www.javadoc.io/doc/$organization$/$name$_2.12",
+    micrositeFooterText := None,
+    micrositeHighlightTheme := "atom-one-light",
+    micrositePalette := Map(
+      "brand-primary" -> "#3e5b95",
+      "brand-secondary" -> "#294066",
+      "brand-tertiary" -> "#2d5799",
+      "gray-dark" -> "#49494B",
+      "gray" -> "#7B7B7E",
+      "gray-light" -> "#E5E5E6",
+      "gray-lighter" -> "#F4F3F4",
+      "white-color" -> "#FFFFFF"
+    ),
+    fork in tut := true,
+    scalacOptions in Tut --= Seq(
+      "-Xfatal-warnings",
+      "-Ywarn-unused-import",
+      "-Ywarn-numeric-widen",
+      "-Ywarn-dead-code",
+      "-Ywarn-unused:imports",
+      "-Xlint:-missing-interpolator,_"
+    ),
+    libraryDependencies += "com.47deg" %% "github4s" % "0.19.0",
+    micrositePushSiteWith := GitHub4s,
+    micrositeGithubToken := sys.env.get("GITHUB_TOKEN"),
+    micrositeExtraMdFiles := Map(
+        file("CHANGELOG.md")        -> ExtraMdFileConfig("changelog.md", "page", Map("title" -> "changelog", "section" -> "changelog", "position" -> "100")),
+        file("CODE_OF_CONDUCT.md")  -> ExtraMdFileConfig("code-of-conduct.md",   "page", Map("title" -> "code of conduct",   "section" -> "code of conduct",   "position" -> "101")),
+        file("LICENSE")             -> ExtraMdFileConfig("license.md",   "page", Map("title" -> "license",   "section" -> "license",   "position" -> "102"))
+    )
   )
 }
 
