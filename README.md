@@ -6,6 +6,10 @@ My [Giter8](http://www.foundweekends.org/giter8/) template for new library proje
 sbt new ChristopherDavenport/library.g8
 ```
 
+## Example
+
+[library-g8-example](https://github.com/ChristopherDavenport/library-g8-example)
+
 ## Setup
 
 ### Github Pages
