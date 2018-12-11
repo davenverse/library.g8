@@ -6,7 +6,6 @@ scala:
   - 2.11.12
 
 jdk:
-  - oraclejdk8
   - openjdk11
 
 before_install:
