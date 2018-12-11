@@ -236,7 +236,7 @@ lazy val micrositeSettings = {
   import microsites._
   Seq(
     micrositeName := "$name$",
-    micrositeDescription := "$description$",
+    micrositeDescription := "$project_description$",
     micrositeAuthor := "$contributorName$",
     micrositeGithubOwner := "$contributorUsername$",
     micrositeGithubRepo := "$name$",
