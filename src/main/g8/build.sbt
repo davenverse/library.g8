@@ -240,6 +240,7 @@ lazy val micrositeSettings = {
     micrositeGithubRepo := "$name$",
     micrositeBaseUrl := "/$name$",
     micrositeDocumentationUrl := "https://www.javadoc.io/doc/$organization$/$name$_2.12",
+    micrositeGitterChannelUrl := "$contributorUsername$/libraries", // Feel Free to Set To Something Else
     micrositeFooterText := None,
     micrositeHighlightTheme := "atom-one-light",
     micrositePalette := Map(
