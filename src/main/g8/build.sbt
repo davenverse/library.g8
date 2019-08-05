@@ -22,28 +22,28 @@ lazy val contributors = Seq(
   "$contributorUsername$" -> "$contributorName$"
 )
 
-val catsV = "$catsV$"
-val kittensV = "$kittensV$"
-val catsEffectV = "$catsEffectV$"
-val mouseV = "$mouseV$"
-val shapelessV = "$shapelessV$"
-val fs2V = "$fs2V$"
-val http4sV = "$http4sV$"
-val circeV = "$circeV$"
-val doobieV = "$doobieV$"
-val pureConfigV = "$pureConfigV$"
-val refinedV = "$refinedV$"
+val catsV = "1.6.1"
+val kittensV = "1.2.1"
+val catsEffectV = "1.4.0"
+val mouseV = "0.20"
+val shapelessV = "2.3.3"
+val fs2V = "1.0.5"
+val http4sV = "0.20.7"
+val circeV = "0.11.1"
+val doobieV = "0.7.0"
+val pureConfigV = "0.11.0"
+val refinedV = "0.9.9"
 
-val log4catsV = "$log4catsV$"
-val catsParV = "$catsParV$"
-val catsTimeV = "$catsTimeV$"
-val fuuidV = "$fuuidV$"
-val lineBackerV = "$lineBackerV$"
+val log4catsV = "0.3.0"
+val catsParV = "0.2.1"
+val catsTimeV = "0.2.0"
+val fuuidV = "0.2.0"
+val lineBackerV = "0.2.0"
 
-val specs2V = "$specs2V$"
+val specs2V = "4.6.0"
 
-val kindProjectorV = "$kindProjectorVersion$"
-val betterMonadicForV = "$betterMonadicForVersion$"
+val kindProjectorV = "0.10.3"
+val betterMonadicForV = "0.3.0"
 
 // General Settings
 lazy val commonSettings = Seq(
