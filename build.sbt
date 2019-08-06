@@ -19,7 +19,7 @@ val lineBackerV = "0.2.1"
 val specs2V = "4.7.0"
 
 val kindProjectorV = "0.10.3"
-val betterMonadicForV = "0.3.0"
+val betterMonadicForV = "0.3.1"
 
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
