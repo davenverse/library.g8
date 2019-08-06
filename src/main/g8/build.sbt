@@ -25,7 +25,6 @@ lazy val contributors = Seq(
 val catsV = "1.6.1"
 val kittensV = "1.2.1"
 val catsEffectV = "1.4.0"
-val mouseV = "0.20"
 val shapelessV = "2.3.3"
 val fs2V = "1.0.5"
 val http4sV = "0.20.8"
@@ -66,7 +65,6 @@ lazy val commonSettings = Seq(
 
     "org.typelevel"               %% "kittens"                    % kittensV,
     "org.typelevel"               %% "alleycats-core"             % catsV,
-    "org.typelevel"               %% "mouse"                      % mouseV,
 
     "org.typelevel"               %% "cats-effect"                % catsEffectV,
 
