@@ -50,7 +50,6 @@ lazy val commonSettings = Seq(
 
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
-  scalacOptions += "-Yrangepos",
 
   scalacOptions in (Compile, doc) ++= Seq(
       "-groups",
