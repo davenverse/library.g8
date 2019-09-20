@@ -4,11 +4,11 @@ val catsEffectV = "1.4.0"
 val mouseV = "0.20"
 val shapelessV = "2.3.3"
 val fs2V = "1.0.5"
-val http4sV = "0.20.10"
-val circeV = "0.12.1"
+val http4sV = "0.20.11"
+val circeV = "0.11.1"
 val doobieV = "0.7.0"
 val pureConfigV = "0.11.1"
-val refinedV = "0.9.9"
+val refinedV = "0.9.10"
 
 val log4catsV = "0.3.0"
 val catsParV = "0.2.1"
@@ -16,7 +16,7 @@ val catsTimeV = "0.2.0"
 val fuuidV = "0.2.0"
 val lineBackerV = "0.2.1"
 
-val specs2V = "4.7.0"
+val specs2V = "4.7.1"
 
 val kindProjectorV = "0.10.3"
 val betterMonadicForV = "0.3.1"
@@ -27,6 +27,7 @@ val betterMonadicForV = "0.3.1"
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
+    scalaVersion := "2.12.10",
     name := "base",
     Keys.test in Test := {
       val _ = (g8Test in Test).toTask("").value
