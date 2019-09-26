@@ -4,7 +4,7 @@ val catsV = "2.0.0"
 val catsEffectV = "2.0.0"
 val shapelessV = "2.3.3"
 val fs2V = "2.0.0"
-val http4sV = "0.21.0-M4"
+val http4sV = "0.21.0-M5"
 val circeV = "0.12.1"
 val doobieV = "0.8.2"
 val log4catsV = "1.0.0"
@@ -12,6 +12,70 @@ val specs2V = "4.7.1"
 
 val kindProjectorV = "0.10.3"
 val betterMonadicForV = "0.3.1"
+
+
+
+// Projects
+lazy val `$name$` = project.in(file("."))
+  .disablePlugins(MimaPlugin)
+  .enablePlugins(NoPublishPlugin)
+  .aggregate(core)
+
+lazy val core = project.in(file("core"))
+  .settings(commonSettings)
+  .settings(
+    name := "$name$"
+  )
+
+lazy val site = project.in(file("site"))
+  .disablePlugins(MimaPlugin)
+  .enablePlugins(MicrositesPlugin)
+  .enablePlugins(MdocPlugin)
+  .enablePlugins(NoPublishPlugin)
+  .settings(commonSettings)
+  .dependsOn(core)
+  .settings{
+    import microsites._
+    Seq(
+      micrositeName := "$name$",
+      micrositeDescription := "$project_description$",
+      micrositeAuthor := "$contributorName$",
+      micrositeGithubOwner := "$contributorUsername$",
+      micrositeGithubRepo := "$name$",
+      micrositeBaseUrl := "/$name$",
+      micrositeDocumentationUrl := "https://www.javadoc.io/doc/$organization$/$name$_2.12",
+      micrositeGitterChannelUrl := "$contributorUsername$/libraries", // Feel Free to Set To Something Else
+      micrositeFooterText := None,
+      micrositeHighlightTheme := "atom-one-light",
+      micrositePalette := Map(
+        "brand-primary" -> "#3e5b95",
+        "brand-secondary" -> "#294066",
+        "brand-tertiary" -> "#2d5799",
+        "gray-dark" -> "#49494B",
+        "gray" -> "#7B7B7E",
+        "gray-light" -> "#E5E5E6",
+        "gray-lighter" -> "#F4F3F4",
+        "white-color" -> "#FFFFFF"
+      ),
+      micrositeCompilingDocsTool := WithMdoc,
+      scalacOptions in Tut --= Seq(
+        "-Xfatal-warnings",
+        "-Ywarn-unused-import",
+        "-Ywarn-numeric-widen",
+        "-Ywarn-dead-code",
+        "-Ywarn-unused:imports",
+        "-Xlint:-missing-interpolator,_"
+      ),
+      libraryDependencies += "com.47deg" %% "github4s" % "0.20.1",
+      micrositePushSiteWith := GitHub4s,
+      micrositeGithubToken := sys.env.get("GITHUB_TOKEN"),
+      micrositeExtraMdFiles := Map(
+          file("CODE_OF_CONDUCT.md")  -> ExtraMdFileConfig("code-of-conduct.md",   "page", Map("title" -> "code of conduct",   "section" -> "code of conduct",   "position" -> "100")),
+          file("LICENSE")             -> ExtraMdFileConfig("license.md",   "page", Map("title" -> "license",   "section" -> "license",   "position" -> "101"))
+      )
+    )
+  }
+  
 
 // General Settings
 lazy val commonSettings = Seq(
@@ -56,75 +120,6 @@ lazy val commonSettings = Seq(
   )
 )
 
-lazy val micrositeSettings = {
-  import microsites._
-  Seq(
-    micrositeName := "$name$",
-    micrositeDescription := "$project_description$",
-    micrositeAuthor := "$contributorName$",
-    micrositeGithubOwner := "$contributorUsername$",
-    micrositeGithubRepo := "$name$",
-    micrositeBaseUrl := "/$name$",
-    micrositeDocumentationUrl := "https://www.javadoc.io/doc/$organization$/$name$_2.12",
-    micrositeGitterChannelUrl := "$contributorUsername$/libraries", // Feel Free to Set To Something Else
-    micrositeFooterText := None,
-    micrositeHighlightTheme := "atom-one-light",
-    micrositePalette := Map(
-      "brand-primary" -> "#3e5b95",
-      "brand-secondary" -> "#294066",
-      "brand-tertiary" -> "#2d5799",
-      "gray-dark" -> "#49494B",
-      "gray" -> "#7B7B7E",
-      "gray-light" -> "#E5E5E6",
-      "gray-lighter" -> "#F4F3F4",
-      "white-color" -> "#FFFFFF"
-    ),
-    micrositeCompilingDocsTool := WithMdoc,
-    scalacOptions in Tut --= Seq(
-      "-Xfatal-warnings",
-      "-Ywarn-unused-import",
-      "-Ywarn-numeric-widen",
-      "-Ywarn-dead-code",
-      "-Ywarn-unused:imports",
-      "-Xlint:-missing-interpolator,_"
-    ),
-    libraryDependencies += "com.47deg" %% "github4s" % "0.20.1",
-    micrositePushSiteWith := GitHub4s,
-    micrositeGithubToken := sys.env.get("GITHUB_TOKEN"),
-    micrositeExtraMdFiles := Map(
-        file("CODE_OF_CONDUCT.md")  -> ExtraMdFileConfig("code-of-conduct.md",   "page", Map("title" -> "code of conduct",   "section" -> "code of conduct",   "position" -> "100")),
-        file("LICENSE")             -> ExtraMdFileConfig("license.md",   "page", Map("title" -> "license",   "section" -> "license",   "position" -> "101"))
-    )
-  )
-}
-
-lazy val skipOnPublishSettings = Seq(
-  skip in publish := true,
-  publish := (()),
-  publishLocal := (()),
-  publishArtifact := false,
-  publishTo := None
-)
-
-// Projects
-lazy val `$name$` = project.in(file("."))
-  .disablePlugins(MimaPlugin)
-  .settings(commonSettings, skipOnPublishSettings)
-  .aggregate(core)
-
-lazy val core = project.in(file("core"))
-  .settings(commonSettings)
-  .settings(
-    name := "$name$"
-  )
-
-lazy val site = project.in(file("site"))
-  .disablePlugins(MimaPlugin)
-  .settings(commonSettings, skipOnPublishSettings, micrositeSettings)
-  .dependsOn(core)
-  .enablePlugins(MicrositesPlugin)
-  .enablePlugins(MdocPlugin)
-
 // General Settings
 inThisBuild(List(
   organization := "$organization$",
@@ -135,15 +130,7 @@ inThisBuild(List(
   homepage := Some(url("https://github.com/$contributorUsername$/$name$")),
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
 
-  publishArtifact in Test := false,
-  publishMavenStyle := true,
   pomIncludeRepository := { _ => false},
-  scmInfo := Some(
-    ScmInfo(
-      url("https://github.com/$contributorUsername$/$name$"),
-      "git@github.com:$contributorUsername$/$name$.git"
-    )
-  ),
   scalacOptions in (Compile, doc) ++= Seq(
       "-groups",
       "-sourcepath", (baseDirectory in LocalRootProject).value.getAbsolutePath,
