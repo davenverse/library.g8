@@ -1,11 +1,11 @@
-addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.0")
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.0")
 addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.8")
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.7")
-addSbtPlugin("org.tpolecat" % "tut-plugin" % "0.6.13")
-addSbtPlugin("com.47deg" % "sbt-microsites" % "0.9.4")
-addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.6.3")
+
 addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % "0.6.1")
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.29")
-addSbtPlugin("io.chrisdavenport" % "sbt-mima-version-check" % "0.1.0")
+
+addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.4.31")
+addSbtPlugin("io.chrisdavenport" % "sbt-mima-version-check" % "0.1.2")
+addSbtPlugin("io.chrisdavenport" % "sbt-no-publish" % "0.1.0")
+
+addSbtPlugin("com.47deg" % "sbt-microsites" % "0.9.6")
+addSbtPlugin("org.scalameta" % "sbt-mdoc" % "1.3.5")
