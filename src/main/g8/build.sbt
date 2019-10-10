@@ -75,7 +75,6 @@ lazy val site = project.in(file("site"))
       )
     )
   }
-  
 
 // General Settings
 lazy val commonSettings = Seq(
