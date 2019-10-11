@@ -5,15 +5,13 @@ val catsEffectV = "2.0.0"
 val shapelessV = "2.3.3"
 val fs2V = "2.0.0"
 val http4sV = "0.21.0-M5"
-val circeV = "0.12.1"
-val doobieV = "0.8.2"
+val circeV = "0.12.2"
+val doobieV = "0.8.4"
 val log4catsV = "1.0.0"
 val specs2V = "4.7.1"
 
-val kindProjectorV = "0.10.3"
+val kindProjectorV = "0.11.0"
 val betterMonadicForV = "0.3.1"
-
-
 
 // Projects
 lazy val `$name$` = project.in(file("."))
@@ -81,7 +79,7 @@ lazy val commonSettings = Seq(
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
 
-  addCompilerPlugin("org.typelevel" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
+  addCompilerPlugin("org.typelevel" %% "kind-projector" % kindProjectorV cross CrossVersion.full),
   addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % betterMonadicForV),
   
   libraryDependencies ++= Seq(
