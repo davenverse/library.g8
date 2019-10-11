@@ -10,10 +10,8 @@ val doobieV = "0.8.2"
 val log4catsV = "1.0.0"
 val specs2V = "4.7.1"
 
-val kindProjectorV = "0.10.3"
+val kindProjectorV = "0.11.0"
 val betterMonadicForV = "0.3.1"
-
-
 
 // Projects
 lazy val `$name$` = project.in(file("."))
@@ -81,7 +79,7 @@ lazy val commonSettings = Seq(
   scalaVersion := "$scala_version$",
   crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
 
-  addCompilerPlugin("org.typelevel" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
+  addCompilerPlugin("org.typelevel" %% "kind-projector" % kindProjectorV cross CrossVersion.full),
   addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % betterMonadicForV),
   
   libraryDependencies ++= Seq(
