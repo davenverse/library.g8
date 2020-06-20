@@ -1,6 +1,5 @@
 package $package$
 
-import cats.implicits._
 import cats.effect._
 
 object Main extends IOApp {
