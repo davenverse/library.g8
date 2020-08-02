@@ -7,13 +7,15 @@ on:
       - '*'
 env:
   CI: true
-  SCALA_VERSION: 2.12.11
+  SCALA_VERSION: 2.12.12
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
       - uses: olafurpg/setup-scala@v5
       - uses: olafurpg/setup-gpg@v2    
       - name: Cache Coursier
