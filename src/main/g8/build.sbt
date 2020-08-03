@@ -8,7 +8,7 @@ val http4sV = "0.21.6"
 val circeV = "0.13.0"
 val doobieV = "0.9.0"
 val log4catsV = "1.1.1"
-val specs2V = "4.10.1"
+val specs2V = "4.10.2"
 
 val kindProjectorV = "0.11.0"
 val betterMonadicForV = "0.3.1"
