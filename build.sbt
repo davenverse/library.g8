@@ -8,7 +8,7 @@ val doobieV = "0.9.0"
 val log4catsV = "1.1.1"
 val specs2V = "4.10.5"
 
-val kindProjectorV = "0.11.0"
+val kindProjectorV = "0.11.1"
 val betterMonadicForV = "0.3.1"
 
 // This build is for this Giter8 template.
