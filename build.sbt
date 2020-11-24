@@ -4,7 +4,7 @@ val shapelessV = "2.3.3"
 val fs2V = "2.4.6"
 val http4sV = "0.21.11"
 val circeV = "0.13.0"
-val doobieV = "0.9.0"
+val doobieV = "0.9.4"
 val log4catsV = "1.1.1"
 val specs2V = "4.10.5"
 
