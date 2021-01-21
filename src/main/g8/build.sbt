@@ -53,7 +53,7 @@ ThisBuild / githubWorkflowPublish := Seq(
       "SONATYPE_USERNAME" -> "\${{ secrets.SONATYPE_USERNAME }}")),
 
   WorkflowStep.Sbt(
-    List(s"++\$Scala213", "docs/publishMicrosite"),
+    List("docs/publishMicrosite"),
     name = Some("Publish microsite")
   )
 )
