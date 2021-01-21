@@ -1,14 +1,14 @@
 package $package$
 
-import org.specs2._
+import munit.CatsEffectSuite
 import cats.effect._
 
-object MainSpec extends mutable.Specification {
+class MainSpec extends CatsEffectSuite {
 
-  "Main" should {
-    "run a println" in {
-      Main.run(List.empty[String]).unsafeRunSync().should_===(ExitCode.Success)
-    }
+  test("Main should exit succesfully") {
+    Main.run(List.empty[String]).map(ec =>
+      assertEquals(ec, ExitCode.Success)
+    )
   }
 
 }

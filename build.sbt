@@ -1,12 +1,13 @@
-val catsV = "2.1.1"
-val catsEffectV = "2.1.4"
+val catsV = "2.3.1"
+val catsEffectV = "2.3.1"
 val shapelessV = "2.3.3"
 val fs2V = "2.4.6"
 val http4sV = "0.21.15"
 val circeV = "0.13.0"
-val doobieV = "0.9.4"
+val doobieV = "0.10.0"
 val log4catsV = "1.1.1"
 val specs2V = "4.10.6"
+val munitCatsEffectV = "0.12.0"
 
 val kindProjectorV = "0.11.3"
 val betterMonadicForV = "0.3.1"
@@ -23,7 +24,7 @@ lazy val root = (project in file("."))
       val _ = (g8Test in Test).toTask("").value
     },
     scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-Xss2m", "-Dfile.encoding=UTF-8"),
-    resolvers += Resolver.url("typesafe", url("http://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns),
+    resolvers += Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns),
 
     addCompilerPlugin("org.typelevel" %% "kind-projector" % kindProjectorV cross CrossVersion.full),
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % betterMonadicForV),
@@ -52,14 +53,16 @@ lazy val root = (project in file("."))
       "org.tpolecat"                %% "doobie-h2"                  % doobieV,
       "org.tpolecat"                %% "doobie-hikari"              % doobieV,
       "org.tpolecat"                %% "doobie-postgres"            % doobieV,
-      "org.tpolecat"                %% "doobie-specs2"              % doobieV       % Test,
 
-      "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
-      "io.chrisdavenport"           %% "log4cats-slf4j"             % log4catsV,
-      "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
+      "org.typelevel"               %%% "munit-cats-effect-2"        % munitCatsEffectV         % Test,
+      // "org.tpolecat"                %% "doobie-specs2"              % doobieV       % Test,
 
-      "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
-      "org.specs2"                  %% "specs2-scalacheck"          % specs2V       % Test
+      // "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
+      // "io.chrisdavenport"           %% "log4cats-slf4j"             % log4catsV,
+      // "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
+
+      // "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
+      // "org.specs2"                  %% "specs2-scalacheck"          % specs2V       % Test
     )
   )
 

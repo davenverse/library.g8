@@ -1,14 +1,75 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-val catsV = "2.1.1"
-val catsEffectV = "2.1.4"
-val shapelessV = "2.3.3"
+val Scala213 = "$scala_version$"
+
+ThisBuild / crossScalaVersions := Seq("$other_scala_version$", Scala213)
+ThisBuild / scalaVersion := crossScalaVersions.value.last
+
+ThisBuild / githubWorkflowArtifactUpload := false
+
+val Scala213Cond = s"matrix.scala == '\$Scala213'"
+
+def rubySetupSteps(cond: Option[String]) = Seq(
+  WorkflowStep.Use(
+    "ruby", "setup-ruby", "v1",
+    name = Some("Setup Ruby"),
+    params = Map("ruby-version" -> "2.6.0"),
+    cond = cond),
+
+  WorkflowStep.Run(
+    List(
+      "gem install saas",
+      "gem install jekyll -v 3.2.1"),
+    name = Some("Install microsite dependencies"),
+    cond = cond))
+
+ThisBuild / githubWorkflowBuildPreamble ++=
+  rubySetupSteps(Some(Scala213Cond))
+
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep.Sbt(List("test", "mimaReportBinaryIssues")),
+
+  WorkflowStep.Sbt(
+    List("docs/makeMicrosite"),
+    cond = Some(Scala213Cond)))
+
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+
+// currently only publishing tags
+ThisBuild / githubWorkflowPublishTargetBranches :=
+  Seq(RefPredicate.StartsWith(Ref.Tag("v")))
+
+ThisBuild / githubWorkflowPublishPreamble ++=
+  WorkflowStep.Use("olafurpg", "setup-gpg", "v3") +: rubySetupSteps(None)
+
+ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("ci-release"),
+    name = Some("Publish artifacts to Sonatype"),
+    env = Map(
+      "PGP_PASSPHRASE" -> "\${{ secrets.PGP_PASSPHRASE }}",
+      "PGP_SECRET" -> "\${{ secrets.PGP_SECRET }}",
+      "SONATYPE_PASSWORD" -> "\${{ secrets.SONATYPE_PASSWORD }}",
+      "SONATYPE_USERNAME" -> "\${{ secrets.SONATYPE_USERNAME }}")),
+
+  WorkflowStep.Sbt(
+    List(s"++\$Scala213", "docs/publishMicrosite"),
+    name = Some("Publish microsite")
+  )
+)
+
+
+val catsV = "2.3.1"
+val catsEffectV = "2.3.1"
+// val shapelessV = "2.3.3"
 val fs2V = "2.4.6"
 val http4sV = "0.21.15"
 val circeV = "0.13.0"
 val doobieV = "0.9.4"
 val log4catsV = "1.1.1"
-val specs2V = "4.10.6"
+
+val munitCatsEffectV = "0.12.0"
+// val specs2V = "4.10.6"
 
 val kindProjectorV = "0.11.3"
 val betterMonadicForV = "0.3.1"
@@ -55,15 +116,6 @@ lazy val site = project.in(file("site"))
         "gray-lighter" -> "#F4F3F4",
         "white-color" -> "#FFFFFF"
       ),
-      micrositeCompilingDocsTool := WithMdoc,
-      scalacOptions in Tut --= Seq(
-        "-Xfatal-warnings",
-        "-Ywarn-unused-import",
-        "-Ywarn-numeric-widen",
-        "-Ywarn-dead-code",
-        "-Ywarn-unused:imports",
-        "-Xlint:-missing-interpolator,_"
-      ),
       micrositePushSiteWith := GitHub4s,
       micrositeGithubToken := sys.env.get("GITHUB_TOKEN"),
       micrositeExtraMdFiles := Map(
@@ -75,11 +127,25 @@ lazy val site = project.in(file("site"))
 
 // General Settings
 lazy val commonSettings = Seq(
-  scalaVersion := "$scala_version$",
-  crossScalaVersions := Seq(scalaVersion.value, "$other_scala_version$"),
-
-  addCompilerPlugin("org.typelevel" %% "kind-projector" % kindProjectorV cross CrossVersion.full),
-  addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % betterMonadicForV),
+  testFrameworks += new TestFramework("munit.Framework"),
+  libraryDependencies ++= {
+    if (isDotty.value) Seq.empty
+    else Seq(
+      compilerPlugin("org.typelevel" % "kind-projector" % kindProjectorV cross CrossVersion.full),
+      compilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForV),
+    )
+  },
+  scalacOptions ++= {
+    if (isDotty.value) Seq("-source:3.0-migration")
+    else Seq()
+  },
+  Compile / doc / sources := {
+    val old = (Compile / doc / sources).value
+    if (isDotty.value)
+      Seq()
+    else
+      old
+  },
   
   libraryDependencies ++= Seq(
     "org.typelevel"               %% "cats-core"                  % catsV,
@@ -87,7 +153,7 @@ lazy val commonSettings = Seq(
 
     "org.typelevel"               %% "cats-effect"                % catsEffectV,
 
-    "com.chuusai"                 %% "shapeless"                  % shapelessV,
+    // "com.chuusai"                 %% "shapeless"                  % shapelessV,
 
     "co.fs2"                      %% "fs2-core"                   % fs2V,
     "co.fs2"                      %% "fs2-io"                     % fs2V,
@@ -105,14 +171,17 @@ lazy val commonSettings = Seq(
     "org.tpolecat"                %% "doobie-h2"                  % doobieV,
     "org.tpolecat"                %% "doobie-hikari"              % doobieV,
     "org.tpolecat"                %% "doobie-postgres"            % doobieV,
-    "org.tpolecat"                %% "doobie-specs2"              % doobieV       % Test,
 
-    "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
-    "io.chrisdavenport"           %% "log4cats-slf4j"             % log4catsV,
-    "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
+    "org.typelevel"               %%% "munit-cats-effect-2"        % munitCatsEffectV         % Test,
 
-    "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
-    "org.specs2"                  %% "specs2-scalacheck"          % specs2V       % Test
+    // "org.tpolecat"                %% "doobie-specs2"              % doobieV       % Test,
+
+    // "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
+    // "io.chrisdavenport"           %% "log4cats-slf4j"             % log4catsV,
+    // "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
+
+    // "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
+    // "org.specs2"                  %% "specs2-scalacheck"          % specs2V       % Test
   )
 )
 
