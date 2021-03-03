@@ -1,5 +1,5 @@
 val catsV = "2.3.1"
-val catsEffectV = "2.3.1"
+val catsEffectV = "2.3.3"
 val shapelessV = "2.3.3"
 val fs2V = "2.5.0"
 val http4sV = "0.21.15"
