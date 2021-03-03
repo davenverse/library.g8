@@ -30,7 +30,7 @@ ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(List("test", "mimaReportBinaryIssues")),
 
   WorkflowStep.Sbt(
-    List("docs/makeMicrosite"),
+    List("site/makeMicrosite"),
     cond = Some(Scala213Cond)))
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
@@ -53,7 +53,7 @@ ThisBuild / githubWorkflowPublish := Seq(
       "SONATYPE_USERNAME" -> "\${{ secrets.SONATYPE_USERNAME }}")),
 
   WorkflowStep.Sbt(
-    List("docs/publishMicrosite"),
+    List("site/publishMicrosite"),
     name = Some("Publish microsite")
   )
 )
