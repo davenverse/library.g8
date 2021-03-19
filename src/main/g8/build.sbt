@@ -37,7 +37,7 @@ ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 
 // currently only publishing tags
 ThisBuild / githubWorkflowPublishTargetBranches :=
-  Seq(RefPredicate.StartsWith(Ref.Tag("v")))
+  Seq(RefPredicate.StartsWith(Ref.Tag("v")), RefPredicate.Equals(Ref.Branch("main")))
 
 ThisBuild / githubWorkflowPublishPreamble ++=
   WorkflowStep.Use("olafurpg", "setup-gpg", "v3") +: rubySetupSteps(None)
@@ -51,7 +51,7 @@ ThisBuild / githubWorkflowPublish := Seq(
       "PGP_SECRET" -> "\${{ secrets.PGP_SECRET }}",
       "SONATYPE_PASSWORD" -> "\${{ secrets.SONATYPE_PASSWORD }}",
       "SONATYPE_USERNAME" -> "\${{ secrets.SONATYPE_USERNAME }}")),
-
+  WorkflowStep.Use("christopherdavenport", "create-ghpages-ifnotexists", "v1"),
   WorkflowStep.Sbt(
     List("site/publishMicrosite"),
     name = Some("Publish microsite")
