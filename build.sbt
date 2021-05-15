@@ -9,7 +9,7 @@ val log4catsV = "1.1.1"
 val specs2V = "4.10.6"
 val munitCatsEffectV = "0.12.0"
 
-val kindProjectorV = "0.11.3"
+val kindProjectorV = "0.13.0"
 val betterMonadicForV = "0.3.1"
 
 // This build is for this Giter8 template.
