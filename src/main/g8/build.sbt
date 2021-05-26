@@ -64,7 +64,7 @@ val catsEffectV = "2.3.1"
 // val shapelessV = "2.3.3"
 val fs2V = "2.5.0"
 val http4sV = "0.21.15"
-val circeV = "0.13.0"
+val circeV = "0.14.1"
 val doobieV = "0.9.4"
 val log4catsV = "1.1.1"
 
