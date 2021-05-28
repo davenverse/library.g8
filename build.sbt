@@ -18,7 +18,7 @@ val betterMonadicForV = "0.3.1"
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    scalaVersion := "2.12.11",
+    scalaVersion := "2.12.14",
     name := "base",
     Keys.test in Test := {
       val _ = (g8Test in Test).toTask("").value
