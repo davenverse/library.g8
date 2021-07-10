@@ -15,7 +15,7 @@ ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    scalaVersion := "2.12.14",
+    scalaVersion := "2.13.6",
     name := "base",
     Keys.test in Test := {
       val _ = (g8Test in Test).toTask("").value
