@@ -4,7 +4,7 @@ val fs2V = "3.1.6"
 val http4sV = "0.23.2"
 val circeV = "0.14.1"
 val doobieV = "1.0.0-RC1"
-val munitCatsEffectV = "1.0.5"
+val munitCatsEffectV = "1.0.6"
 
 ThisBuild / githubWorkflowPublishCond := None
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
