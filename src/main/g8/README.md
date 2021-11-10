@@ -1,4 +1,4 @@
-# $name$ - $project_description$ [![Build Status](https://travis-ci.com/$contributorUsername$/$name$.svg?branch=master)](https://travis-ci.com/$contributorUsername$/$name$) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/$organization$/$name$_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/$organization$/$name$_2.12) ![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-Scala-blue.svg)
+# $name$ - $project_description$ [![Build Status](https://github.com/$contributorUsername$/$name$/actions/workflows/ci.yml/badge.svg)](https://travis-ci.com/$contributorUsername$/$name$) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/$organization$/$name$_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/$organization$/$name$_2.12) ![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-Scala-blue.svg)
 
 ## [Head on over to the microsite](https://$contributorUsername$.github.io/$name$)
 
