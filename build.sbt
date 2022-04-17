@@ -1,3 +1,14 @@
+ThisBuild / tlBaseVersion := "0.0" // your current series x.y
+
+ThisBuild / organization := "io.chrisdavenport"
+ThisBuild / organizationName := "Christopher Davenport"
+ThisBuild / licenses := Seq(License.MIT)
+ThisBuild / developers := List(
+  tlGitHubDev("christopherdavenport", "Christopher Davenport")
+)
+ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlSonatypeUseLegacyHost := true
+
 val catsV = "2.7.0"
 val catsEffectV = "3.3.11"
 val fs2V = "3.2.7"
@@ -13,12 +24,13 @@ ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 // To test the template run `g8` or `g8Test` from the sbt session.
 // See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
 lazy val root = (project in file("."))
+  .enablePlugins(NoPublishPlugin)
   .enablePlugins(ScriptedPlugin)
   .settings(
     scalaVersion := "2.12.14",
     name := "base",
-    Keys.test in Test := {
-      val _ = (g8Test in Test).toTask("").value
+    Test / Keys.test := {
+      val _ = (Test / g8Test).toTask("").value
     },
     scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-Xss2m", "-Dfile.encoding=UTF-8"),
     resolvers += Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns),

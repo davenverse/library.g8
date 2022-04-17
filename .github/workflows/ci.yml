@@ -15,6 +15,11 @@ on:
     tags: [v*]
 
 env:
+  PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+  SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+  SONATYPE_CREDENTIAL_HOST: ${{ secrets.SONATYPE_CREDENTIAL_HOST }}
+  SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+  PGP_SECRET: ${{ secrets.PGP_SECRET }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -23,8 +28,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.14, 2.13.6, 3.0.0]
-        java: [adopt@1.8, adopt@1.11]
+        scala: [2.12.15]
+        java: [temurin@8]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
@@ -32,10 +37,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Java and Scala
-        uses: olafurpg/setup-scala@v12
+      - name: Download Java (temurin@8)
+        id: download-java-temurin-8
+        if: matrix.java == 'temurin@8'
+        uses: typelevel/download-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          distribution: temurin
+          java-version: 8
+
+      - name: Setup Java (temurin@8)
+        if: matrix.java == 'temurin@8'
+        uses: actions/setup-java@v2
+        with:
+          distribution: jdkfile
+          java-version: 8
+          jdkFile: ${{ steps.download-java-temurin-8.outputs.jdkFile }}
 
       - name: Cache sbt
         uses: actions/cache@v2
@@ -50,6 +66,15 @@ jobs:
           key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
 
       - name: Check that workflows are up to date
-        run: sbt --client '++${{ matrix.scala }}; githubWorkflowCheck'
+        run: sbt '++${{ matrix.scala }}' 'project /' githubWorkflowCheck
 
-      - run: sbt --client '++${{ matrix.scala }}; test; mimaReportBinaryIssues'
+      - name: Test
+        run: sbt '++${{ matrix.scala }}' test
+
+      - name: Check binary compatibility
+        if: matrix.java == 'temurin@8'
+        run: sbt '++${{ matrix.scala }}' mimaReportBinaryIssues
+
+      - name: Generate API documentation
+        if: matrix.java == 'temurin@8'
+        run: sbt '++${{ matrix.scala }}' doc
