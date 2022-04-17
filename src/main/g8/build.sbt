@@ -52,10 +52,10 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
       "io.circe"                    %%% "circe-generic"              % circeV,
       "io.circe"                    %%% "circe-parser"               % circeV,
 
-      "org.tpolecat"                %%% "doobie-core"                % doobieV,
-      "org.tpolecat"                %%% "doobie-h2"                  % doobieV,
-      "org.tpolecat"                %%% "doobie-hikari"              % doobieV,
-      "org.tpolecat"                %%% "doobie-postgres"            % doobieV,
+      "org.tpolecat"                %% "doobie-core"                % doobieV,
+      "org.tpolecat"                %% "doobie-h2"                  % doobieV,
+      "org.tpolecat"                %% "doobie-hikari"              % doobieV,
+      "org.tpolecat"                %% "doobie-postgres"            % doobieV,
 
       "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
 

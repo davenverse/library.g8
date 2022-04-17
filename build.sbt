@@ -36,20 +36,20 @@ lazy val root = (project in file("."))
 
   
     libraryDependencies ++= Seq(
-      "org.typelevel"               %% "cats-core"                  % catsV,
-      "org.typelevel"               %% "cats-effect"                % catsEffectV,
+      "org.typelevel"               %%% "cats-core"                  % catsV,
+      "org.typelevel"               %%% "cats-effect"                % catsEffectV,
 
-      "co.fs2"                      %% "fs2-core"                   % fs2V,
-      "co.fs2"                      %% "fs2-io"                     % fs2V,
+      "co.fs2"                      %%% "fs2-core"                   % fs2V,
+      "co.fs2"                      %%% "fs2-io"                     % fs2V,
 
-      "org.http4s"                  %% "http4s-dsl"                 % http4sV,
-      "org.http4s"                  %% "http4s-ember-server"        % http4sV,
-      "org.http4s"                  %% "http4s-ember-client"        % http4sV,
-      "org.http4s"                  %% "http4s-circe"               % http4sV,
+      "org.http4s"                  %%% "http4s-dsl"                 % http4sV,
+      "org.http4s"                  %%% "http4s-ember-server"        % http4sV,
+      "org.http4s"                  %%% "http4s-ember-client"        % http4sV,
+      "org.http4s"                  %%% "http4s-circe"               % http4sV,
 
-      "io.circe"                    %% "circe-core"                 % circeV,
-      "io.circe"                    %% "circe-generic"              % circeV,
-      "io.circe"                    %% "circe-parser"               % circeV,
+      "io.circe"                    %%% "circe-core"                 % circeV,
+      "io.circe"                    %%% "circe-generic"              % circeV,
+      "io.circe"                    %%% "circe-parser"               % circeV,
 
       "org.tpolecat"                %% "doobie-core"                % doobieV,
       "org.tpolecat"                %% "doobie-h2"                  % doobieV,
