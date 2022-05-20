@@ -21,7 +21,7 @@ val catsV = "2.7.0"
 val catsEffectV = "3.3.11"
 val fs2V = "3.2.7"
 val http4sV = "0.23.11"
-val circeV = "0.14.1"
+val circeV = "0.14.2"
 val doobieV = "1.0.0-RC2"
 val munitCatsEffectV = "1.0.7"
 
