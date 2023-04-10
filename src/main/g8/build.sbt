@@ -6,22 +6,24 @@ ThisBuild / licenses := Seq(License.MIT)
 ThisBuild / developers := List(
   tlGitHubDev("christopherdavenport", "Christopher Davenport")
 )
+ThisBuild / versionScheme := Some("early-semver")
+
 ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSonatypeUseLegacyHost := true
 
 
-val Scala213 = "$scala_version$"
+val Scala3 = "$scala_version$"
 
-ThisBuild / crossScalaVersions := Seq("$other_scala_version$", Scala213)
-ThisBuild / scalaVersion := Scala213
+ThisBuild / crossScalaVersions := Seq("$other_scala_version$", Scala3)
+ThisBuild / scalaVersion := Scala3
 
 ThisBuild / testFrameworks += new TestFramework("munit.Framework")
 
-val catsV = "2.7.0"
-val catsEffectV = "3.3.12"
-val fs2V = "3.2.7"
-val http4sV = "0.23.12"
-val circeV = "0.14.2"
+val catsV = "2.9.0"
+val catsEffectV = "3.4.8"
+val fs2V = "3.6.1"
+val http4sV = "0.23.18"
+val circeV = "0.14.5"
 val doobieV = "1.0.0-RC2"
 val munitCatsEffectV = "1.0.7"
 
