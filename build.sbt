@@ -6,16 +6,16 @@ ThisBuild / licenses := Seq(License.MIT)
 ThisBuild / developers := List(
   tlGitHubDev("christopherdavenport", "Christopher Davenport")
 )
+
 ThisBuild / tlSonatypeUseLegacyHost := true
 
-val catsV = "2.7.0"
-val catsEffectV = "3.3.12"
-val fs2V = "3.2.7"
-val http4sV = "0.23.12"
+val catsV = "2.9.0"
+val catsEffectV = "3.4.8"
+val fs2V = "3.6.1"
+val http4sV = "0.23.18"
 val circeV = "0.14.2"
 val doobieV = "1.0.0-RC2"
 val munitCatsEffectV = "1.0.7"
-
 ThisBuild / githubWorkflowPublishCond := None
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
