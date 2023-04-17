@@ -10,7 +10,7 @@ ThisBuild / developers := List(
 ThisBuild / tlSonatypeUseLegacyHost := true
 
 val catsV = "2.9.0"
-val catsEffectV = "3.4.8"
+val catsEffectV = "3.4.9"
 val fs2V = "3.6.1"
 val http4sV = "0.23.18"
 val circeV = "0.14.5"
