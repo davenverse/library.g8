@@ -15,7 +15,7 @@ val fs2V = "3.6.1"
 val http4sV = "0.23.18"
 val circeV = "0.14.5"
 val doobieV = "1.0.0-RC2"
-val munitCatsEffectV = "1.0.7"
+val munitCatsEffectV = "2.0.0"
 ThisBuild / githubWorkflowPublishCond := None
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
@@ -56,7 +56,7 @@ lazy val root = (project in file("."))
       "org.tpolecat"                %% "doobie-hikari"              % doobieV,
       "org.tpolecat"                %% "doobie-postgres"            % doobieV,
 
-      "org.typelevel"               %%% "munit-cats-effect-3"        % munitCatsEffectV         % Test,
+      "org.typelevel"               %%% "munit-cats-effect"        % munitCatsEffectV         % Test,
     )
   )
 
